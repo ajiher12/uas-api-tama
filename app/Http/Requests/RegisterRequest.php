@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStudentRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +24,18 @@ class StoreStudentRequest extends FormRequest
     {
         return [
             //
-            'student_name' => 'required|string|max:100',
-            'is_active' => 'required|integer',
-            'created_by' => 'required|string|max:100'
 
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:100|unique:users',
+            'password' => 'required|confirmed'
         ];
+    }
+
+
+    public function getData()
+    {
+        $data = $this->validated();
+        $data['password'] = Hash::make($data['password']);
+        return $data;
     }
 }

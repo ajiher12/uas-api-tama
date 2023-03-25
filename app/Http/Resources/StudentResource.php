@@ -19,7 +19,8 @@ class StudentResource extends JsonResource
 
             'id' => $this->id,
             'student_name' => $this->student_name,
-            'is_active' => (bool) $this->is_active
+            'is_active' => (bool) $this->is_active,
+            'created_by' => $this->created_by
         ];
     }
 }

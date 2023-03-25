@@ -21,13 +21,6 @@ class StudentController extends Controller
         return StudentResource::collection(Student::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,6 +28,10 @@ class StudentController extends Controller
     public function store(StoreStudentRequest $request)
     {
         //
+        // return $request->validated();
+        $student =   Student::create($request->validated());
+
+        return   StudentResource::make($student);
     }
 
     /**
@@ -60,6 +57,9 @@ class StudentController extends Controller
     public function update(UpdateStudentRequest $request, Student $student)
     {
         //
+
+        $student->update($request->validated());
+        return   StudentResource::make($student);
     }
 
     /**
@@ -68,5 +68,8 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+        $student->delete();
+
+        return response()->noContent();
     }
 }
