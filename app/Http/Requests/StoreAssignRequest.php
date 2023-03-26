@@ -11,7 +11,7 @@ class StoreAssignRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,10 @@ class StoreAssignRequest extends FormRequest
     {
         return [
             //
+            'assign_name' => 'required|string|max:100',
+            'is_active' => 'required|integer',
+            'created_by' => 'required|string|max:100'
+
         ];
     }
 }

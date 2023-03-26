@@ -11,7 +11,7 @@ class StoreExamRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,11 @@ class StoreExamRequest extends FormRequest
     {
         return [
             //
+            'id_student' => 'required|integer',
+            'assign_type' => 'required|integer',
+            'score' => 'required|integer',
+            'created_by' => 'required|string|max:100',
+
         ];
     }
 }

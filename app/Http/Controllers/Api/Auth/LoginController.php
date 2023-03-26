@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,6 +27,20 @@ class LoginController extends Controller
         }
 
 
-        return "berhasil login";
+
+        return response()->json([
+            'user' => $user,
+            'token' => $user->createToken('laravel_api_token')->plainTextToken
+
+        ]);
+
+        // if (!auth()->attempt($request->only(['email', 'password']))) {
+        //     throw ValidationException::withMessages([
+        //         'email' => ['The Credential you entered are incorrect']
+        //     ]);
+        // }
+
+
+        // return "berhasil login";
     }
 }

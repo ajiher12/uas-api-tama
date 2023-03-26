@@ -11,6 +11,10 @@ use App\Http\Requests\StoreExamRequest;
 use App\Http\Requests\UpdateExamRequest;
 
 
+// Import db package 
+use Illuminate\Support\Facades\DB;
+
+
 
 class ExamController extends Controller
 {
@@ -36,6 +40,9 @@ class ExamController extends Controller
     public function store(StoreExamRequest $request)
     {
         //
+        $exam =   Exam::create($request->validated());
+
+        return   ExamResource::make($exam);
     }
 
     /**
@@ -45,6 +52,37 @@ class ExamController extends Controller
     {
         //
         return   ExamResource::make($exam);
+    }
+
+    public  function showGrade()
+    {
+
+        $grading = DB::table('exams as a')
+            ->join('students as b', 'a.id_student', '=', 'b.id')
+            ->select(DB::raw('SUM(score) as total_score'), DB::raw('(CASE 
+            WHEN SUM(score) <= "65" THEN "D" 
+            WHEN SUM(score) <= "75" THEN "C" 
+            WHEN SUM(score) <= "85" THEN "B" 
+            ELSE "A" 
+            END) AS grading_status'), 'b.student_name')
+            ->groupBy('b.student_name')
+            ->get();
+
+
+
+
+        // return    count($grading);
+
+        // for ($i = 0; $i < count($grading); $i++) {
+        //     var_dump($grading[$i]);
+        // }
+        // ($grading);
+
+        return response()->json([
+            'grading' => $grading,
+            'status' => 'success'
+
+        ]);
     }
 
     /**
@@ -61,6 +99,9 @@ class ExamController extends Controller
     public function update(UpdateExamRequest $request, Exam $exam)
     {
         //
+
+        $exam->update($request->validated());
+        return   ExamResource::make($exam);
     }
 
     /**
@@ -69,5 +110,8 @@ class ExamController extends Controller
     public function destroy(Exam $exam)
     {
         //
+        $exam->delete();
+
+        return response()->noContent();
     }
 }

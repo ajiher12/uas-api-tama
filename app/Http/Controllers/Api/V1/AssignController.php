@@ -20,13 +20,6 @@ class AssignController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,6 +27,10 @@ class AssignController extends Controller
     public function store(StoreAssignRequest $request)
     {
         //
+
+        $student =   Assign::create($request->validated());
+
+        return   AssignResource::make($student);
     }
 
     /**
@@ -59,6 +56,9 @@ class AssignController extends Controller
     public function update(UpdateAssignRequest $request, Assign $assign)
     {
         //
+
+        $assign->update($request->validated());
+        return   AssignResource::make($assign);
     }
 
     /**
@@ -67,5 +67,9 @@ class AssignController extends Controller
     public function destroy(Assign $assign)
     {
         //
+
+        $assign->delete();
+
+        return response()->noContent();
     }
 }
