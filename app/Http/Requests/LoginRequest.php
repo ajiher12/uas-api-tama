@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
@@ -26,5 +28,7 @@ class LoginRequest extends FormRequest
             'email' => 'required|email',
             'password' => 'required'
         ];
+
+
     }
 }

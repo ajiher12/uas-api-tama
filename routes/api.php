@@ -41,7 +41,8 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
 
 
 Route::prefix('auth')->group(function () {
-    Route::post('/login', LoginController::class);
+    // 'middleware' => ''
+    Route::post('/login', LoginController::class)->middleware('throttle:3,1');
     Route::post('/logout', LogoutController::class)->middleware('auth:sanctum');
     Route::post('/register', RegisterController::class);
     Route::post('/forget-password', [ForgotPasswordController::class, 'forgetPassword']);
