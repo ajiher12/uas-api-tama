@@ -68,16 +68,6 @@ class ExamController extends Controller
             ->groupBy('b.student_name')
             ->get();
 
-
-
-
-        // return    count($grading);
-
-        // for ($i = 0; $i < count($grading); $i++) {
-        //     var_dump($grading[$i]);
-        // }
-        // ($grading);
-
         return response()->json([
             'grading' => $grading,
             'status' => 'success'
