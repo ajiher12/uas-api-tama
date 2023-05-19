@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Assign;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAssignRequest;
-use App\Http\Requests\UpdateAssignRequest;
 use App\Http\Resources\AssignResource;
 
 class AssignController extends Controller
@@ -16,7 +15,22 @@ class AssignController extends Controller
     public function index()
     {
         //
-        return AssignResource::collection(Assign::all());
+        $data =   AssignResource::collection(Assign::all());
+        if (!$data) {
+            return response()->json([
+                'message' => 'Assign is  available',
+                'data' => $data,
+                'status' => 200
+
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Assign is not available',
+                'data' => $data,
+                'status' => 404
+
+            ]);
+        }
     }
 
 

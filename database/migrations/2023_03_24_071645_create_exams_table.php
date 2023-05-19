@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exams', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_student')->nullable()->references('id')->on('master_student')->onDelete('cascade');
-            $table->integer('assign_type')->nullable()->references('id')->on('master_assign')->onDelete('cascade');
+        // Schema::create('exams', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->integer('id_student')->nullable()->references('id')->on('master_student')->onDelete('cascade');
+        //     $table->integer('assign_type')->nullable()->references('id')->on('master_assign')->onDelete('cascade');
  
 
 
-            $table->integer('score')->nullable();
-            $table->string('created_by')->nullable();
-            $table->timestamp('updated_by')->nullable();
-            $table->timestamps();
-        });
+        //     $table->integer('score')->nullable();
+        //     $table->string('created_by')->nullable();
+        //     $table->timestamp('updated_by')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**

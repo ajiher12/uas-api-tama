@@ -13,8 +13,8 @@ class Assign extends Model
     protected $fillable = ['assign_name', 'is_active', 'created_by'];
 
 
-    public function exam(): HasMany
-    {
-        return $this->hasMany(Exam::class);
-    }
+    // public function exam(): HasMany
+    // {
+    //     return $this->hasMany(Exam::class);
+    // }
 }

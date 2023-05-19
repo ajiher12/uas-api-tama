@@ -27,7 +27,8 @@ class RegisterRequest extends FormRequest
 
             'name' => 'required|string|max:100',
             'email' => 'required|email|max:100|unique:users',
-            'password' => 'required|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/'
+            'password' => 'required|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
+            'type_account' => 'required'
         ];
     }
 

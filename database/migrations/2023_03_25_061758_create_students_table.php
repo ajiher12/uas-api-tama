@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->id();
-            $table->string('student_name', 100)->nullable();
-            $table->integer('is_active')->nullable();
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('students', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('student_name', 100)->nullable();
+        //     $table->integer('is_active')->nullable();
+        //     $table->string('created_by')->nullable();
+        //     $table->string('updated_by')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**
