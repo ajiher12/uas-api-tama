@@ -41,7 +41,7 @@ class ItemController extends Controller
     public function store(StoreItemRequest $request)
     {
         //
-        // dd($request->validated());
+
 
         $item =   Item::create($request->validated());
         $validate =    ItemResource::make($item);
