@@ -6,9 +6,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Item;
 use App\Http\Controllers\Controller;
 
+use App\Http\Resources\ItemResource;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
-use App\Http\Resources\ItemResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ItemController extends Controller
 {
@@ -18,13 +19,22 @@ class ItemController extends Controller
     public function index()
     {
         //
-        $data =   ItemResource::collection(Item::all());
 
-        return response()->json([
-            'data' => $data,
-            'status' => 200
+        try {
+            $data =   ItemResource::collection(Item::all());
+          
+            return response()->json([
+                'data' => $data,
+                'status' => 200
 
-        ]);
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'data' => 'Not Found',
+                'status' => 404
+
+            ]);
+        }
     }
 
     /**
@@ -46,6 +56,7 @@ class ItemController extends Controller
         $item =   Item::create($request->validated());
         $validate =    ItemResource::make($item);
 
+        // return $item->id;
         return response()->json([
             'item' => $validate,
             'status' => 200

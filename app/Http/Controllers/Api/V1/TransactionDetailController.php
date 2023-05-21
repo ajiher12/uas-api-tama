@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTransactionDetailRequest;
 use App\Http\Requests\UpdateTransactionDetailRequest;
+use App\Http\Resources\TransactionDetailResource;
 use App\Models\TransactionDetail;
 
 class TransactionDetailController extends Controller
@@ -16,6 +17,7 @@ class TransactionDetailController extends Controller
     public function index()
     {
         //
+        return TransactionDetailResource::collection(TransactionDetail::all());
     }
 
     /**
@@ -32,7 +34,12 @@ class TransactionDetailController extends Controller
     public function store(StoreTransactionDetailRequest $request)
     {
         //
+        $exam =   TransactionDetail::create($request->validated());
+        return   TransactionDetailResource::make($exam);
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -40,6 +47,14 @@ class TransactionDetailController extends Controller
     public function show(TransactionDetail $transactionDetail)
     {
         //
+
+        $data =  TransactionDetailResource::make($transactionDetail);
+
+        return response()->json([
+            'data' => $data,
+            'status' => 200
+
+        ]);
     }
 
     /**
@@ -56,6 +71,8 @@ class TransactionDetailController extends Controller
     public function update(UpdateTransactionDetailRequest $request, TransactionDetail $transactionDetail)
     {
         //
+        $transactionDetail->update($request->validated());
+        return   TransactionDetailResource::make($transactionDetail);
     }
 
     /**
@@ -64,5 +81,13 @@ class TransactionDetailController extends Controller
     public function destroy(TransactionDetail $transactionDetail)
     {
         //
+        $validate =  $transactionDetail->delete();
+
+        return response()->json([
+            'message' => 'Success Delete Transaction Detail',
+            'status' => 200,
+            'true' => $validate
+
+        ]);
     }
 }

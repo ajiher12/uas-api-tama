@@ -77,6 +77,7 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+
         $validate =  $transaction->delete();
 
         return response()->json([
