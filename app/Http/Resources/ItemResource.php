@@ -14,6 +14,7 @@ class ItemResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        
         return [
             'id' =>     $this->id,
             'product_name' => $this->product_name,
@@ -22,4 +23,6 @@ class ItemResource extends JsonResource
             'model_no' => $this->model_no,
         ];
     }
+
+   
 }

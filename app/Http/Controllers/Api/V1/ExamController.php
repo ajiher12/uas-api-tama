@@ -42,7 +42,8 @@ class ExamController extends Controller
         //
         $exam =   Exam::create($request->validated());
 
-        return   ExamResource::make($exam);
+        return $exam->id;
+        return   ExamResource::make($exam->id);
     }
 
     /**
